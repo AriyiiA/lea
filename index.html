@@ -64,25 +64,9 @@ body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;b
 .screen{animation:screenIn .45s cubic-bezier(.22,1,.36,1) both;}
 @keyframes screenIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 
-/* ══ MAIRIE ══ */
-#fakeScreen{text-align:center;}
-.mairie-logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#2a4a8a,#1a2f60);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto .8rem;box-shadow:0 4px 16px rgba(26,47,96,.22);}
-.mairie-title{font-weight:500;font-size:.95rem;color:#1a2f60;margin-bottom:.15rem;}
-.mairie-ref{font-size:.68rem;color:#8899bb;margin-bottom:1rem;letter-spacing:.04em;text-transform:uppercase;}
-.mairie-progress{height:3px;background:#e8edf8;border-radius:3px;margin-bottom:1rem;overflow:hidden;}
-.mairie-progress-bar{height:100%;width:82%;background:linear-gradient(90deg,#2a4a8a,#5577cc);border-radius:3px;}
-.mairie-q{background:#f0f4ff;border-radius:12px;padding:.85rem 1rem;margin-bottom:1rem;text-align:left;border:1px solid #d5dff5;}
-.mairie-q-label{font-size:.66rem;color:#8899bb;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem;}
-.mairie-q-text{font-size:.86rem;color:#1a2f60;line-height:1.5;}
-.mairie-btns{display:flex;flex-direction:column;gap:7px;margin-bottom:.8rem;}
-.mairie-btn{background:#fff;color:#1a2f60;border:1px solid #d5dff5;padding:11px 16px;border-radius:50px;font-size:.85rem;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:9px;touch-action:manipulation;}
-.mairie-btn:active{background:#f0f4ff;transform:scale(.98);}
-.mairie-legal{font-size:.65rem;color:#bbc6d8;line-height:1.5;}
 
-/* ══ TROLL ══ */
-#trollScreen{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-#trollScreen img{width:100%;max-width:300px;border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.1);}
-#trollScreen p{font-size:.76rem;color:var(--muted);margin-top:.7rem;}
+
+
 
 /* ══ STEP 1 ══ */
 .step1.hidden{display:none;}
@@ -168,9 +152,6 @@ body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;b
 @keyframes stream{0%{opacity:1;transform:translateY(0) rotate(var(--rot));}100%{opacity:0;transform:translateY(110vh) rotate(calc(var(--rot) + 540deg));}}
 @keyframes starfly{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(0) rotate(720deg);}}
 </style>
-</head>
-<body>
-
 <div class="bg-blob blob1"></div>
 <div class="bg-blob blob2"></div>
 <div class="bg-blob blob3"></div>
@@ -187,30 +168,6 @@ body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;b
 
 <div class="page">
 <div class="card" id="card">
-
-  <!-- MAIRIE -->
-  <div id="fakeScreen" class="screen">
-    <div class="mairie-logo">🏛️</div>
-    <div class="mairie-title">Mairie de Cahors</div>
-    <div class="mairie-ref">Enquête citoyenne · Réf. 2026-RC-0042</div>
-    <div class="mairie-progress"><div class="mairie-progress-bar"></div></div>
-    <div class="mairie-q">
-      <div class="mairie-q-label">Question 1 / 1</div>
-      <div class="mairie-q-text">Êtes-vous satisfait(e) des équipements de voirie de votre quartier ?</div>
-    </div>
-    <div class="mairie-btns">
-      <button class="mairie-btn" onclick="revealReal()"><span>👍</span> Très satisfait(e)</button>
-      <button class="mairie-btn" onclick="revealReal()"><span>😐</span> Plutôt satisfait(e)</button>
-      <button class="mairie-btn" onclick="revealReal()"><span>👎</span> Pas satisfait(e)</button>
-    </div>
-    <p class="mairie-legal">Données collectées dans le cadre du plan local d'urbanisme 2026–2031</p>
-  </div>
-
-  <!-- TROLL -->
-  <div id="trollScreen">
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExenc2OHBkOHd0NDA3OW5oNnB2Z2txanhuYTRqMWd4aDBpaHVzdnEzbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KbLwG0Y59i0JIPPeJm/giphy.gif" alt="troll" />
-    <p>La vraie page arrive... 👀</p>
-  </div>
 
   <!-- STEP 1 -->
   <div class="step1 screen" id="step1">
@@ -268,36 +225,21 @@ body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;b
 const FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdyTQ2sAY7pW-UIOayydOD-9K_7u-asF08OAdQ9BcSXuLHEKg/formResponse";
 const ENTRY_DATE="entry.1202159359",ENTRY_HEURE="entry.1170606869";
 const dates=[
-  {label:"Lun",num:"2", month:"Juin",disabled:false},
-  {label:"Mar",num:"3", month:"Juin",disabled:true},
-  {label:"Mer",num:"4", month:"Juin",disabled:true},
-  {label:"Jeu",num:"5", month:"Juin",disabled:true},
-  {label:"Ven",num:"6", month:"Juin",disabled:true},
-  {label:"Sam",num:"7", month:"Juin",disabled:false},
-  {label:"Lun",num:"9", month:"Juin",disabled:false},
-  {label:"Mar",num:"10",month:"Juin",disabled:false},
-  {label:"Mer",num:"11",month:"Juin",disabled:false},
-  {label:"Jeu",num:"12",month:"Juin",disabled:false},
-  {label:"Ven",num:"13",month:"Juin",disabled:false},
-  {label:"Sam",num:"14",month:"Juin",disabled:false},
+  {label:"Lun",num:"1", month:"Juin",disabled:false},
+  {label:"Mar",num:"2", month:"Juin",disabled:true},
+  {label:"Mer",num:"3", month:"Juin",disabled:true},
+  {label:"Jeu",num:"4", month:"Juin",disabled:true},
+  {label:"Ven",num:"5", month:"Juin",disabled:true},
+  {label:"Sam",num:"6", month:"Juin",disabled:false},
+  {label:"Lun",num:"8", month:"Juin",disabled:false},
+  {label:"Mar",num:"9", month:"Juin",disabled:false},
+  {label:"Mer",num:"10",month:"Juin",disabled:false},
+  {label:"Jeu",num:"11",month:"Juin",disabled:false},
 ];
 const timesSoir=["19h00","19h30","20h00","20h30","21h00"],timesMidi=["12h00","12h30","13h00","13h30","14h00"];
 let selDate=null,selTime=null,hintIdx=0;
 const hints=["Allez, t'as envie aussi 🤭","Le bouton se sauve ! 👀","Il disparaît... c'est un signe 🌹","Impossible de cliquer Non 😏","T'as qu'un seul choix possible 💅"];
 
-/* MAIRIE */
-function revealReal(){
-  const fake=document.getElementById('fakeScreen');
-  fake.style.transition='opacity .28s';fake.style.opacity='0';
-  setTimeout(()=>{
-    fake.style.display='none';
-    const t=document.getElementById('trollScreen');t.style.display='flex';
-    setTimeout(()=>{
-      t.style.transition='opacity .35s';t.style.opacity='0';
-      setTimeout(()=>{t.style.display='none';document.getElementById('step1').style.display='block';},350);
-    },4000);
-  },280);
-}
 
 /* NON */
 function onNoHover(){showHint();escapeBtn();}
@@ -336,7 +278,7 @@ function sayYes(){
 }
 
 function showStep2(){
-  document.getElementById('step1').style.display='none';
+  
   const s2=document.getElementById('step2');s2.style.display='block';s2.classList.add('screen');
   renderDates();renderTimes();
 }
@@ -374,7 +316,7 @@ function checkConfirm(){document.getElementById('confirmBtn').disabled=!(selDate
 /* CONFIRMATION */
 function confirmDate(){
   submitToForm();
-  document.getElementById('step1').style.display='none';
+  
   document.getElementById('step2').style.display='none';
   const s3=document.getElementById('step3');s3.style.display='block';s3.classList.add('screen');
   const mk=p=>`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--rose-deep);flex-shrink:0">${p}</svg>`;
@@ -455,8 +397,7 @@ function spawnStars(n){
   }
 })();
 
-/* step1 caché par défaut, révélé après troll */
-document.getElementById('step1').style.display='none';
+
 </script>
 </body>
 </html>
