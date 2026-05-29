@@ -17,7 +17,7 @@
   --card:#fff9f5;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;overflow:hidden;height:100%;}body{min-height:100%;}
 body{min-height:100vh;background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--ink);overflow-x:hidden;cursor:default;}
 
 /* ── GRAIN OVERLAY ── */
@@ -47,6 +47,7 @@ body::before{
   max-height:calc(100vh - 2rem);
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
   position:relative;
   box-shadow:0 2px 60px rgba(201,64,112,.07), 0 1px 0 rgba(255,255,255,.9) inset;
 }
