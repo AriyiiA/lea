@@ -267,7 +267,20 @@ body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;b
 <script>
 const FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdyTQ2sAY7pW-UIOayydOD-9K_7u-asF08OAdQ9BcSXuLHEKg/formResponse";
 const ENTRY_DATE="entry.1202159359",ENTRY_HEURE="entry.1170606869";
-const dates=[{label:"Lun",num:"2",month:"Juin",disabled:true},{label:"Mar",num:"3",month:"Juin",disabled:true},{label:"Mer",num:"4",month:"Juin",disabled:false},{label:"Jeu",num:"5",month:"Juin",disabled:false},{label:"Ven",num:"6",month:"Juin",disabled:false},{label:"Sam",num:"7",month:"Juin",disabled:false}];
+const dates=[
+  {label:"Lun",num:"2", month:"Juin",disabled:false},
+  {label:"Mar",num:"3", month:"Juin",disabled:true},
+  {label:"Mer",num:"4", month:"Juin",disabled:true},
+  {label:"Jeu",num:"5", month:"Juin",disabled:true},
+  {label:"Ven",num:"6", month:"Juin",disabled:true},
+  {label:"Sam",num:"7", month:"Juin",disabled:false},
+  {label:"Lun",num:"9", month:"Juin",disabled:false},
+  {label:"Mar",num:"10",month:"Juin",disabled:false},
+  {label:"Mer",num:"11",month:"Juin",disabled:false},
+  {label:"Jeu",num:"12",month:"Juin",disabled:false},
+  {label:"Ven",num:"13",month:"Juin",disabled:false},
+  {label:"Sam",num:"14",month:"Juin",disabled:false},
+];
 const timesSoir=["19h00","19h30","20h00","20h30","21h00"],timesMidi=["12h00","12h30","13h00","13h30","14h00"];
 let selDate=null,selTime=null,hintIdx=0;
 const hints=["Allez, t'as envie aussi 🤭","Le bouton se sauve ! 👀","Il disparaît... c'est un signe 🌹","Impossible de cliquer Non 😏","T'as qu'un seul choix possible 💅"];
@@ -323,6 +336,7 @@ function sayYes(){
 }
 
 function showStep2(){
+  document.getElementById('step1').style.display='none';
   const s2=document.getElementById('step2');s2.style.display='block';s2.classList.add('screen');
   renderDates();renderTimes();
 }
@@ -360,6 +374,7 @@ function checkConfirm(){document.getElementById('confirmBtn').disabled=!(selDate
 /* CONFIRMATION */
 function confirmDate(){
   submitToForm();
+  document.getElementById('step1').style.display='none';
   document.getElementById('step2').style.display='none';
   const s3=document.getElementById('step3');s3.style.display='block';s3.classList.add('screen');
   const mk=p=>`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--rose-deep);flex-shrink:0">${p}</svg>`;
