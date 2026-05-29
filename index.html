@@ -327,8 +327,17 @@ body::before{
 @keyframes spinAnim{to{transform:rotate(360deg);}}
 
 /* CONFETTI */
-.confetti-piece{position:fixed;pointer-events:none;z-index:999;animation:cfall 2.2s ease-in forwards;border-radius:3px;}
-@keyframes cfall{0%{opacity:1;transform:translateY(0) rotate(0deg);}100%{opacity:0;transform:translateY(110vh) rotate(900deg);}}
+.confetti-piece{position:fixed;pointer-events:none;z-index:998;border-radius:3px;}
+@keyframes cfall-l{0%{opacity:1;transform:translateY(0) rotate(0deg);}100%{opacity:0;transform:translateY(110vh) translateX(-120px) rotate(-720deg);}}
+@keyframes cfall-r{0%{opacity:1;transform:translateY(0) rotate(0deg);}100%{opacity:0;transform:translateY(110vh) translateX(120px) rotate(720deg);}}
+@keyframes cfall-s{0%{opacity:1;transform:translateY(0) rotate(0deg) scale(1);}50%{opacity:1;}100%{opacity:0;transform:translateY(110vh) translateX(40px) rotate(1080deg) scale(.4);}}
+@keyframes burst{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--bx),var(--by)) scale(0);}}
+/* STREAMERS */
+.streamer{position:fixed;pointer-events:none;z-index:997;width:4px;border-radius:2px;transform-origin:top center;}
+@keyframes stream{0%{opacity:1;transform:translateY(0) rotate(var(--rot)) scaleY(1);}100%{opacity:0;transform:translateY(110vh) rotate(calc(var(--rot) + 540deg)) scaleY(.3);}}
+/* ÉTOILES */
+.star-piece{position:fixed;pointer-events:none;z-index:999;font-size:1.2rem;}
+@keyframes starfly{0%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg);}100%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(0) rotate(720deg);}}
 
 
 /* ── HEARTS BG ── */
@@ -336,6 +345,8 @@ body::before{
 .heart-float{position:absolute;opacity:0.08;animation:floatHeart linear infinite;color:var(--rose-deep);}
 @keyframes bubbleIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 @keyframes floatHeart{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.08;}90%{opacity:0.04;}100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}}
+
+
 
 /* ── RESPONSIVE ── */
 @media(max-width:400px){
@@ -360,7 +371,7 @@ body::before{
   <div class="party-card">
     <span class="party-big" id="partyBig">🎉</span>
     <div class="party-title">Elle a dit oui !!</div>
-    <div class="party-sub">Choisis maintenant la date 👇</div>
+    <div class="party-sub">Choisis maintenant la date</div>
   </div>
 </div>
 
@@ -368,57 +379,32 @@ body::before{
 <div class="hearts-bg" id="heartsBg"></div>
 <div class="card" id="card">
 
-  <!-- ══ BLAGUE : FAUX iMESSAGE ══ -->
+  <!-- ══ FAUSSE MAIRIE ══ -->
   <div id="fakeScreen" class="screen">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid rgba(0,0,0,.07);">
-      <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#e8c4d0,#c97090);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">👤</div>
-      <div>
-        <div style="font-weight:600;font-size:.88rem;color:var(--ink);">Inconnu</div>
-        <div style="font-size:.72rem;color:#aaa;">Numéro non enregistré</div>
-      </div>
-      <div style="margin-left:auto;font-size:.72rem;color:#aaa;">maintenant</div>
+    <div class="mairie-logo">🏛️</div>
+    <div class="mairie-title">Mairie de Cahors</div>
+    <div class="mairie-ref">Enquête citoyenne · Réf. 2026-RC-0042</div>
+    <div class="mairie-progress"><div class="mairie-progress-bar"></div></div>
+    <div class="mairie-q">
+      <div class="mairie-q-label">Question 1 / 1</div>
+      <div class="mairie-q-text">Êtes-vous satisfait(e) des équipements de voirie de votre quartier ?</div>
     </div>
-
-    <!-- bulle SMS -->
-    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:1.4rem;">
-      <div style="align-self:flex-start;max-width:82%;">
-        <div id="bubble1" style="background:#f0f0f0;border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:.88rem;color:var(--ink);line-height:1.5;opacity:0;animation:bubbleIn .4s .2s cubic-bezier(.22,1,.36,1) forwards;">
-          Salut Léa 👋
-        </div>
-      </div>
-      <div style="align-self:flex-start;max-width:88%;">
-        <div id="bubble2" style="background:#f0f0f0;border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:.88rem;color:var(--ink);line-height:1.5;opacity:0;animation:bubbleIn .4s .7s cubic-bezier(.22,1,.36,1) forwards;">
-          T'as reçu un colis mais on a pas pu livrer 📦
-        </div>
-      </div>
-      <div style="align-self:flex-start;max-width:90%;">
-        <div id="bubble3" style="background:#f0f0f0;border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:.88rem;color:var(--ink);line-height:1.5;opacity:0;animation:bubbleIn .4s 1.3s cubic-bezier(.22,1,.36,1) forwards;">
-          Clique ici pour reprogrammer la livraison → <span style="color:#007aff;text-decoration:underline;cursor:pointer;" onclick="revealReal()">colissimo-reprog.fr/LEA-42</span>
-        </div>
-      </div>
-      <div style="align-self:flex-start;max-width:70%;">
-        <div id="bubble4" style="background:#f0f0f0;border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:.88rem;color:var(--ink);line-height:1.5;opacity:0;animation:bubbleIn .4s 2s cubic-bezier(.22,1,.36,1) forwards;">
-          ⚠️ Lien expire dans <span id="countdown" style="font-weight:600;color:#ff3b30;">10</span>s
-        </div>
-      </div>
+    <div class="mairie-btns">
+      <button class="mairie-btn" onclick="revealReal()"><span>👍</span> Très satisfait(e)</button>
+      <button class="mairie-btn" onclick="revealReal()"><span>😐</span> Plutôt satisfait(e)</button>
+      <button class="mairie-btn" onclick="revealReal()"><span>👎</span> Pas satisfait(e)</button>
     </div>
-
-    <div style="display:flex;gap:8px;opacity:0;animation:bubbleIn .3s 2.5s forwards;">
-      <button onclick="revealReal()" style="flex:1;background:#007aff;color:#fff;border:none;padding:13px;border-radius:50px;font-size:.9rem;font-family:'DM Sans',sans-serif;cursor:pointer;font-weight:500;">Reprogrammer 📦</button>
-      <button onclick="revealReal()" style="flex:1;background:#f0f0f0;color:var(--ink);border:none;padding:13px;border-radius:50px;font-size:.9rem;font-family:'DM Sans',sans-serif;cursor:pointer;">Ignorer</button>
-    </div>
-
-    <p style="font-size:.68rem;color:#ccc;text-align:center;margin-top:.9rem;line-height:1.5;">Ce message peut contenir du phishing.<br>Signalez au 33700.</p>
+    <p class="mairie-legal">Données collectées dans le cadre du plan local d'urbanisme 2026–2031</p>
   </div>
 
   <!-- ══ ÉCRAN TROLL ══ -->
   <div id="trollScreen" style="display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.5rem 0;">
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--rose-dark);margin-bottom:1rem;animation:screenIn .4s cubic-bezier(.22,1,.36,1);">T'as cru 😂</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--rose-dark);margin-bottom:1rem;animation:screenIn .4s cubic-bezier(.22,1,.36,1);"></p>
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExenc2OHBkOHd0NDA3OW5oNnB2Z2txanhuYTRqMWd4aDBpaHVzdnEzbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KbLwG0Y59i0JIPPeJm/giphy.gif"
       alt="troll"
       style="width:100%;max-width:320px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.12);animation:screenIn .4s .1s cubic-bezier(.22,1,.36,1) both;"
     />
-    <p style="font-size:.8rem;color:var(--muted);margin-top:.9rem;animation:screenIn .4s .2s both;">La vraie page arrive dans 3 secondes... 👀</p>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:.9rem;animation:screenIn .4s .2s both;">La vraie page arrive... 👀</p>
   </div>
 
   <!-- ══ VRAI CONTENU ══ -->
@@ -505,17 +491,7 @@ const hints = [
 ];
 
 /* ── MAIRIE ── */
-// Countdown faux SMS
-let _cdVal = 10;
-const _cdEl = () => document.getElementById('countdown');
-const _cdTimer = setInterval(() => {
-  _cdVal--;
-  if(_cdEl()) _cdEl().textContent = _cdVal;
-  if(_cdVal <= 0) clearInterval(_cdTimer);
-}, 1000);
-
 function revealReal(){
-  clearInterval(_cdTimer);
   // Cacher le fake
   const fake = document.getElementById('fakeScreen');
   fake.style.transition = 'opacity .3s';
@@ -533,7 +509,7 @@ function revealReal(){
         troll.style.display = 'none';
         document.getElementById('realContent').style.display = 'block';
       }, 400);
-    }, 3000);
+    }, 10000);
   }, 300);
 }
 
@@ -598,7 +574,7 @@ function sayYes(){
     }, i*70);
   }
 
-  spawnConfetti(90);
+  spawnConfetti(140);
 
   setTimeout(()=>{
     overlay.style.transition='opacity .5s';
@@ -682,7 +658,7 @@ function confirmDate(){
     document.getElementById('spinIcon').style.display='none';
     document.getElementById('badgeText').textContent='Réservé';
     document.getElementById('reservBadge').classList.add('done');
-    spawnConfetti(70);
+    spawnConfetti(120);
   },10000);
 }
 
