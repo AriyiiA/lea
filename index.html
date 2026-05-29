@@ -3,286 +3,483 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Une question pour toi 🌹</title>
+<title>Urgent 🚨</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{min-height:100%;background:#fff8fb;font-family:'Inter',sans-serif;}
-.page{min-height:100vh;background:#fff8fb;padding:3rem 1.5rem;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden;}
+html,body{min-height:100%;background:#fff8fb;font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* PAGE */
+.page{min-height:100vh;background:#fff8fb;padding:2rem 1rem;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden;}
 .hearts-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
 .heart-float{position:absolute;opacity:0.09;animation:floatHeart linear infinite;}
 @keyframes floatHeart{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.09;}90%{opacity:0.05;}100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}}
-.card{background:#fff;border-radius:24px;border:1px solid #f2d5e2;padding:2.5rem 2rem;max-width:500px;width:100%;position:relative;z-index:1;text-align:center;margin:auto;}
-.emoji-hero{font-size:3rem;display:block;animation:pulse 2.2s ease-in-out infinite;margin-bottom:0.6rem;}
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
-h1{font-family:'Playfair Display',serif;font-size:2rem;color:#7d1d3f;margin-bottom:0.5rem;line-height:1.2;}
+
+/* CARD */
+.card{background:#fff;border-radius:20px;border:1px solid #f2d5e2;padding:2rem 1.5rem;max-width:480px;width:100%;position:relative;z-index:1;text-align:center;margin:auto;}
+
+/* TRANSITIONS ENTRE ÉCRANS */
+.screen{animation:fadeSlideIn 0.45s cubic-bezier(0.34,1.2,0.64,1) both;}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* ===== FAKE MAIRIE ===== */
+.mairie-icon{font-size:2.4rem;display:block;margin-bottom:0.5rem;}
+.mairie-title{font-family:'Playfair Display',serif;font-size:1.45rem;color:#2a2a5a;margin-bottom:0.3rem;}
+.mairie-ref{font-size:0.78rem;color:#aaa;margin-bottom:1.3rem;line-height:1.5;}
+.mairie-box{background:#f0f4ff;border:1px solid #c5cff5;border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.3rem;text-align:left;font-size:0.85rem;color:#3a3a6a;line-height:1.7;}
+.mairie-btns{display:flex;flex-direction:column;gap:9px;margin-bottom:1.1rem;}
+.mairie-btn{background:#f0f4ff;color:#2a2a5a;border:1.5px solid #c5cff5;padding:13px 20px;border-radius:50px;font-size:0.9rem;font-family:'Inter',sans-serif;cursor:pointer;transition:background 0.15s,transform 0.1s;touch-action:manipulation;}
+.mairie-btn:hover{background:#dde5ff;}
+.mairie-btn:active{transform:scale(0.97);}
+.mairie-legal{font-size:0.7rem;color:#ccc;font-style:italic;}
+
+/* ===== STEP 1 ===== */
+.emoji-hero{font-size:2.8rem;display:block;animation:pulse 2.2s ease-in-out infinite;margin-bottom:0.5rem;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+h1{font-family:'Playfair Display',serif;font-size:1.75rem;color:#7d1d3f;margin-bottom:0.4rem;line-height:1.2;}
 h1 em{font-style:italic;color:#b5365a;}
-.subtitle{color:#888;font-size:0.9rem;margin-bottom:1.8rem;line-height:1.6;}
-.info-block{background:#fff0f5;border-radius:14px;padding:1.1rem 1.4rem;margin-bottom:1.8rem;text-align:left;border:1px solid #f5ccd9;}
-.info-row{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:0.9rem;color:#4a2030;}
+.subtitle{color:#888;font-size:0.88rem;margin-bottom:1.4rem;line-height:1.6;}
+.info-block{background:#fff0f5;border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.4rem;text-align:left;border:1px solid #f5ccd9;}
+.info-row{display:flex;align-items:center;gap:9px;padding:4px 0;font-size:0.88rem;color:#4a2030;}
 .info-row svg{flex-shrink:0;color:#b5365a;}
-.question{font-family:'Playfair Display',serif;font-size:1.3rem;color:#4a2030;margin-bottom:1.6rem;font-style:italic;}
-.btn-yes{background:#fbeaf0;color:#7d1d3f;border:1.5px solid #e8a0b8;padding:13px 32px;border-radius:50px;font-size:0.95rem;font-weight:500;cursor:pointer;transition:transform 0.15s,background 0.15s,border-color 0.15s;font-family:'Inter',sans-serif;}
-.btn-yes:hover{background:#f5ccd9;border-color:#c9607d;transform:scale(1.04);}
+.question{font-family:'Playfair Display',serif;font-size:1.15rem;color:#4a2030;margin-bottom:1.4rem;font-style:italic;line-height:1.5;}
+
+/* BTN YES */
+.btn-yes{background:#fbeaf0;color:#7d1d3f;border:1.5px solid #e8a0b8;padding:14px 36px;border-radius:50px;font-size:1rem;font-weight:500;cursor:pointer;transition:transform 0.15s,background 0.15s;font-family:'Inter',sans-serif;touch-action:manipulation;}
+.btn-yes:hover{background:#f5ccd9;border-color:#c9607d;transform:scale(1.05);}
 .btn-yes:active{transform:scale(0.97);}
-.btn-no{background:#f5f5f5;color:#888;border:1.5px solid #ddd;padding:13px 24px;border-radius:50px;font-size:0.9rem;cursor:pointer;transition:all 0.1s;font-family:'Inter',sans-serif;position:absolute;white-space:nowrap;}
-.btn-no:hover{background:#eee;}
-.btn-row{display:flex;gap:16px;justify-content:center;align-items:center;margin-bottom:0.8rem;}
-.no-container{position:relative;width:110px;height:48px;}
-.no-hint{font-size:0.92rem;color:#b5365a;margin-top:0.6rem;font-style:italic;min-height:24px;font-weight:500;opacity:0;transition:opacity 0.1s;}
+
+/* BTN NO */
+.btn-row{display:flex;gap:14px;justify-content:center;align-items:center;margin-bottom:0.9rem;min-height:52px;position:relative;}
+.no-wrapper{position:relative;display:inline-block;transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1);}
+.btn-no{background:#f0f0f0;color:#7d1d3f;border:1.5px solid #e8a0b8;padding:14px 28px;border-radius:50px;font-size:1rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;touch-action:manipulation;}
+@media(hover:hover){.btn-no:hover{opacity:0;pointer-events:none;}}
+.no-hint{font-size:0.98rem;color:#b5365a;margin-top:0.4rem;font-style:italic;min-height:24px;font-weight:600;opacity:0;}
 .no-hint.pop{animation:hintBounce 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;}
-@keyframes hintBounce{0%{opacity:0;transform:scale(0.5) translateY(6px);}60%{opacity:1;transform:scale(1.15) translateY(-2px);}80%{transform:scale(0.95);}100%{opacity:1;transform:scale(1) translateY(0);}}
+@keyframes hintBounce{0%{opacity:0;transform:scale(0.4) translateY(8px);}55%{opacity:1;transform:scale(1.18) translateY(-3px);}75%{transform:scale(0.94);}100%{opacity:1;transform:scale(1);}}
+
 .step1.hidden{display:none;}
+
+/* ===== STEP 2 ===== */
 .step2{display:none;}
-.step2.visible{display:block;}
-.step2 h2{font-family:'Playfair Display',serif;color:#7d1d3f;font-size:1.4rem;margin-bottom:0.4rem;}
-.step2 .sub{color:#999;font-size:0.88rem;margin-bottom:1.4rem;}
-.date-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.4rem;}
-.date-btn{padding:11px 6px;border-radius:12px;border:1.5px solid #f0d0dc;background:#fff;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;}
+.step2 h2{font-family:'Playfair Display',serif;color:#7d1d3f;font-size:1.3rem;margin-bottom:1.1rem;}
+.date-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:1.2rem;}
+.date-btn{padding:10px 4px;border-radius:11px;border:1.5px solid #f0d0dc;background:#fff;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;touch-action:manipulation;}
 .date-btn:hover{border-color:#b5365a;background:#fff5f8;}
 .date-btn.selected{border-color:#b5365a;background:#fff0f5;}
-.date-btn .dn{font-size:0.68rem;color:#b5365a;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;}
-.date-btn .num{font-size:1.25rem;font-weight:600;color:#4a2030;}
-.date-btn .mo{font-size:0.68rem;color:#aaa;}
+.date-btn .dn{font-size:0.66rem;color:#b5365a;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;}
+.date-btn .num{font-size:1.2rem;font-weight:600;color:#4a2030;}
+.date-btn .mo{font-size:0.66rem;color:#aaa;}
 .date-btn.dis{opacity:0.32;cursor:not-allowed;pointer-events:none;}
-.time-label{font-size:0.85rem;color:#999;margin-bottom:8px;display:block;}
-.time-options{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:1.4rem;}
-.time-btn{padding:8px 14px;border-radius:50px;border:1.5px solid #f0d0dc;background:#fff;cursor:pointer;font-size:0.85rem;color:#4a2030;font-family:'Inter',sans-serif;transition:all 0.2s;}
+.time-label{font-size:0.82rem;color:#999;margin-bottom:7px;display:block;}
+.time-options{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:1.2rem;}
+.time-section-label{width:100%;font-size:0.72rem;color:#b5365a;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+.time-btn{padding:9px 12px;border-radius:50px;border:1.5px solid #f0d0dc;background:#fff;cursor:pointer;font-size:0.83rem;color:#4a2030;font-family:'Inter',sans-serif;transition:all 0.2s;touch-action:manipulation;}
 .time-btn:hover{border-color:#b5365a;}
 .time-btn.selected{background:#fbeaf0;color:#7d1d3f;border-color:#b5365a;font-weight:500;}
-.btn-confirm{background:#fbeaf0;color:#7d1d3f;border:1.5px solid #e8a0b8;padding:13px 36px;border-radius:50px;font-size:0.95rem;font-weight:500;cursor:pointer;width:100%;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.btn-confirm{background:#fbeaf0;color:#7d1d3f;border:1.5px solid #e8a0b8;padding:14px 36px;border-radius:50px;font-size:0.95rem;font-weight:500;cursor:pointer;width:100%;font-family:'Inter',sans-serif;transition:all 0.15s;touch-action:manipulation;}
 .btn-confirm:hover:not(:disabled){background:#f5ccd9;border-color:#c9607d;}
 .btn-confirm:disabled{opacity:0.35;cursor:not-allowed;}
+
+/* ===== STEP 3 ===== */
 .step3{display:none;text-align:center;}
-.step3.visible{display:block;}
-.big-emoji{font-size:3.5rem;display:block;animation:popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);}
-@keyframes popIn{from{transform:scale(0);}to{transform:scale(1);}}
-.step3 h2{font-family:'Playfair Display',serif;color:#7d1d3f;font-size:1.5rem;margin:0.8rem 0 0.5rem;}
-.step3 p{color:#888;font-size:0.9rem;line-height:1.6;margin-bottom:1.2rem;}
-.recap{background:#fff5f8;border-radius:12px;padding:1rem 1.2rem;text-align:left;border:1px solid #f5ccd9;}
-.recap-row{display:flex;align-items:center;gap:8px;font-size:0.88rem;color:#4a2030;padding:4px 0;}
+.big-emoji{font-size:3rem;display:block;}
+.step3 h2{font-family:'Playfair Display',serif;color:#7d1d3f;font-size:1.4rem;margin:0.7rem 0 0.4rem;}
+.step3 p{color:#888;font-size:0.88rem;line-height:1.6;margin-bottom:1rem;}
+.recap{background:#fff5f8;border-radius:12px;padding:0.9rem 1.1rem;text-align:left;border:1px solid #f5ccd9;margin-bottom:1rem;}
+.recap-row{display:flex;align-items:center;gap:8px;font-size:0.86rem;color:#4a2030;padding:4px 0;}
 .recap-row svg{color:#b5365a;flex-shrink:0;}
-.sent-badge{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;background:#e8f5ec;color:#2d6a3f;border:1px solid #a8d9b5;border-radius:50px;padding:8px 18px;font-size:0.82rem;font-weight:500;}
-.confetti-piece{position:fixed;width:8px;height:8px;animation:cfall 1.5s ease-in forwards;border-radius:2px;pointer-events:none;z-index:999;}
-@keyframes cfall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+.sent-badge{display:inline-flex;align-items:center;gap:7px;background:#fbeaf0;color:#7d1d3f;border:1.5px solid #e8a0b8;border-radius:50px;padding:10px 20px;font-size:0.88rem;font-weight:500;transition:background 0.5s,border-color 0.5s,color 0.5s;}
+.sent-badge.done{background:#e8f5ec;color:#2d6a3f;border-color:#a8d9b5;}
+.spin{animation:spinAnim 1s linear infinite;}
+@keyframes spinAnim{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+/* ===== FÊTE (overlay quand elle dit oui) ===== */
+#partyOverlay{
+  position:fixed;inset:0;z-index:50;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(255,240,248,0.92);
+  backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;
+  transition:opacity 0.4s;
+}
+#partyOverlay.show{opacity:1;pointer-events:all;}
+.party-emoji{font-size:5rem;display:block;animation:partyPop 0.6s cubic-bezier(0.34,1.56,0.64,1) both;}
+@keyframes partyPop{from{transform:scale(0) rotate(-20deg);}to{transform:scale(1) rotate(0deg);}}
+.party-text{font-family:'Playfair Display',serif;font-size:1.8rem;color:#7d1d3f;margin-top:1rem;text-align:center;animation:fadeSlideIn 0.5s 0.2s both;}
+.party-sub{font-size:0.9rem;color:#b5365a;margin-top:0.4rem;animation:fadeSlideIn 0.5s 0.35s both;}
+.floating-emojis span{
+  position:fixed;font-size:1.8rem;
+  animation:floatUp 1.8s ease-in forwards;
+  pointer-events:none;
+}
+@keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:1;}100%{transform:translateY(-110vh) scale(0.5) rotate(30deg);opacity:0;}}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;pointer-events:none;z-index:999;animation:cfall 2s ease-in forwards;border-radius:3px;}
+@keyframes cfall{0%{opacity:1;transform:translateY(-10px) rotate(0deg);}100%{opacity:0;transform:translateY(110vh) rotate(800deg);}}
+
+/* RESPONSIVE */
+@media(max-width:420px){
+  .page{padding:1.2rem 0.75rem;}
+  .card{padding:1.5rem 1rem;border-radius:18px;}
+  h1{font-size:1.5rem;}
+  .emoji-hero{font-size:2.4rem;}
+  .btn-yes,.btn-no{padding:13px 22px;font-size:0.92rem;}
+  .date-btn .num{font-size:1.1rem;}
+  .time-btn{padding:8px 10px;font-size:0.79rem;}
+  .party-text{font-size:1.5rem;}
+}
 </style>
 </head>
 <body>
+
+<!-- OVERLAY FÊTE -->
+<div id="partyOverlay">
+  <span class="party-emoji">🎉</span>
+  <div class="party-text">Elle a dit oui !!</div>
+  <div class="party-sub">Choisis maintenant la date 👇</div>
+  <div class="floating-emojis" id="floatingEmojis"></div>
+</div>
+
 <div class="page" id="mainPage">
 <div class="hearts-bg" id="heartsBg"></div>
 <div class="card" id="card">
 
-  <div class="step1" id="step1">
-    <span class="emoji-hero">🌹</span>
-    <h1>Hey <em>Léa</em> !</h1>
-    <p class="subtitle">Il y a quelque chose d'important que j'aimerais te demander...<br>Lis bien ce qui suit 🙈</p>
-    <div class="info-block">
-      <div class="info-row">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Le <strong>Grill de Julia</strong> — Cahors</span>
-      </div>
-      <div class="info-row">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span>La semaine prochaine, tu choisis quand ⬇️</span>
-      </div>
-      <div class="info-row">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-        <span>Juste toi et moi, une belle soirée 🥂</span>
-      </div>
+  <!-- FAUSSE MAIRIE -->
+  <div id="fakeScreen" class="screen">
+    <span class="mairie-icon">🏛️</span>
+    <h2 class="mairie-title">Mairie de Cahors</h2>
+    <p class="mairie-ref">Enquête citoyenne obligatoire<br>Réf. n°2026-RC-0042</p>
+    <div class="mairie-box">
+      <strong>Question 1 / 1</strong><br>
+      Êtes-vous satisfait(e) des équipements<br>de voirie de votre quartier ?
     </div>
-    <p class="question">"Léa, est-ce que tu voudrais bien dîner avec moi ?"</p>
-    <div class="btn-row" id="btnRow">
-      <button class="btn-yes" onclick="sayYes()">Oui, avec plaisir ! 🥰</button>
-      <div class="no-container" id="noContainer">
-        <button class="btn-no" id="noBtn" onclick="runAway()">Non...</button>
-      </div>
+    <div class="mairie-btns">
+      <button class="mairie-btn" onclick="revealReal()">👍 Très satisfait(e)</button>
+      <button class="mairie-btn" onclick="revealReal()">😐 Plutôt satisfait(e)</button>
+      <button class="mairie-btn" onclick="revealReal()">👎 Pas satisfait(e)</button>
     </div>
-    <p class="no-hint" id="noHint">&nbsp;</p>
+    <p class="mairie-legal">Données collectées dans le cadre du plan local d'urbanisme 2026-2031</p>
   </div>
 
-  <div class="step2" id="step2">
-    <span class="emoji-hero">🎉</span>
-    <h2>Super ! Quand es-tu dispo ?</h2>
-    <p class="sub">Choisis la date et l'heure qui t'arrangent</p>
-    <div class="date-grid" id="dateGrid"></div>
-    <span class="time-label">À quelle heure ?</span>
-    <div class="time-options" id="timeOptions"></div>
-    <button class="btn-confirm" id="confirmBtn" onclick="confirmDate()" disabled>Confirmer notre rendez-vous ✨</button>
-  </div>
+  <!-- VRAI CONTENU -->
+  <div id="realContent" style="display:none;">
 
-  <div class="step3" id="step3">
-    <span class="big-emoji">💌</span>
-    <h2>C'est noté !</h2>
-    <p>Ta réponse a bien été envoyée.<br>Il a plus qu'à attendre avec impatience 😄</p>
-    <div class="recap" id="recapBlock"></div>
-    <div class="sent-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      Confirmation envoyée
+    <div class="step1 screen" id="step1">
+      <span class="emoji-hero">🌹</span>
+      <h1><em>Léa</em> !</h1>
+      <div class="info-block">
+        <div class="info-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Le <strong>Grill de Julia</strong> — Cahors</span>
+        </div>
+        <div class="info-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>La semaine prochaine, tu choisis quand</span>
+        </div>
+        <div class="info-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span>Ça te chauffe ?</span>
+        </div>
+      </div>
+      <div class="btn-row" id="btnRow">
+        <button class="btn-yes" onclick="sayYes()">Oui, avec plaisir ! 🥰</button>
+        <div class="no-wrapper" id="noWrapper">
+          <button class="btn-no" id="noBtn" onmouseenter="onNoHover()" onclick="onNoClick()">Non...</button>
+        </div>
+      </div>
+      <p class="no-hint" id="noHint">&nbsp;</p>
     </div>
-  </div>
 
+    <div class="step2" id="step2">
+      <h2>On fait ça quand alors ?</h2>
+      <div class="date-grid" id="dateGrid"></div>
+      <span class="time-label">À quelle heure ?</span>
+      <div class="time-options" id="timeOptions"></div>
+      <button class="btn-confirm" id="confirmBtn" onclick="confirmDate()" disabled>Confirmer ✨</button>
+    </div>
+
+    <div class="step3" id="step3">
+      <span class="big-emoji">💌</span>
+      <h2>Impeccable !</h2>
+      <div class="recap" id="recapBlock"></div>
+      <div class="sent-badge" id="reservBadge">
+        <svg class="spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <span id="badgeText">Réservation en cours...</span>
+      </div>
+    </div>
+
+  </div><!-- /realContent -->
 </div>
 </div>
 
 <script>
 const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSdyTQ2sAY7pW-UIOayydOD-9K_7u-asF08OAdQ9BcSXuLHEKg/formResponse";
-const ENTRY_DATE = "entry.1202159359";
+const ENTRY_DATE  = "entry.1202159359";
 const ENTRY_HEURE = "entry.1170606869";
 
 const dates = [
-  {label:"Lun",num:"2",month:"Juin",disabled:true},
-  {label:"Mar",num:"3",month:"Juin",disabled:true},
-  {label:"Mer",num:"4",month:"Juin",disabled:false},
-  {label:"Jeu",num:"5",month:"Juin",disabled:false},
-  {label:"Ven",num:"6",month:"Juin",disabled:false},
-  {label:"Sam",num:"7",month:"Juin",disabled:false},
+  {label:"Lun",num:"2", month:"Juin",disabled:true},
+  {label:"Mar",num:"3", month:"Juin",disabled:true},
+  {label:"Mer",num:"4", month:"Juin",disabled:false},
+  {label:"Jeu",num:"5", month:"Juin",disabled:false},
+  {label:"Ven",num:"6", month:"Juin",disabled:false},
+  {label:"Sam",num:"7", month:"Juin",disabled:false},
 ];
 const timesSoir = ["19h00","19h30","20h00","20h30","21h00"];
-const timesMidi = ["12h00","12h30","13h00","13h30","14h00"];
-let selDate=null,selTime=null,noClicks=0;
-const hints=[
+const timesMidi  = ["12h00","12h30","13h00","13h30","14h00"];
+let selDate=null, selTime=null, hintIdx=0;
+
+const hints = [
   "Allez, t'as envie aussi 🤭",
-  "Le bouton est timide apparemment...",
-  "Il court, il court le bouton Non !",
-  "Pssst... il rétrécit à chaque clic 🙈",
-  "Bon... c'est un signe 🌹",
+  "Le bouton se sauve ! 👀",
+  "Il disparaît... c'est un signe 🌹",
+  "Impossible de cliquer Non 😏",
+  "T'as qu'un seul choix possible 💅",
 ];
 
-function runAway(){
-  noClicks++;
-  const btn=document.getElementById('noBtn');
-  const hint=document.getElementById('noHint');
-  if(noClicks>=5){btn.style.display='none';hint.textContent="On dirait bien que t'as pas le choix 😏";hint.classList.remove('pop');void hint.offsetWidth;hint.classList.add('pop');return;}
-  hint.textContent=hints[noClicks-1];
+/* ---- Fausse mairie ---- */
+function revealReal(){
+  const fake = document.getElementById('fakeScreen');
+  fake.style.animation = 'none';
+  fake.style.transition = 'opacity 0.35s, transform 0.35s';
+  fake.style.opacity = '0';
+  fake.style.transform = 'translateY(-14px)';
+  setTimeout(() => {
+    fake.style.display = 'none';
+    const real = document.getElementById('realContent');
+    real.style.display = 'block';
+  }, 340);
+}
+
+/* ---- Bouton NON ---- */
+const isTouchDevice = () => window.matchMedia("(hover: none)").matches;
+
+function onNoHover(){ showHint(); escapeBtn(); }
+function onNoClick(){ sayYes(); }
+
+function showHint(){
+  const hint = document.getElementById('noHint');
+  hint.textContent = hints[Math.min(hintIdx, hints.length-1)];
   hint.classList.remove('pop');
   void hint.offsetWidth;
   hint.classList.add('pop');
-  const card=document.getElementById('card');
-  const cr=card.getBoundingClientRect();
-  const nc=document.getElementById('noContainer');
-  nc.style.position='absolute';
-  nc.style.left=Math.random()*(cr.width-130)+'px';
-  nc.style.top=Math.random()*(cr.height-56)+'px';
-  card.style.position='relative';
-  btn.style.transform='rotate('+(Math.random()-0.5)*18+'deg)';
-  btn.style.fontSize=Math.max(0.6,0.9-noClicks*0.07)+'rem';
-  btn.style.opacity=Math.max(0.25,1-noClicks*0.18);
+  hintIdx++;
 }
 
+function escapeBtn(){
+  const btn     = document.getElementById('noBtn');
+  const card    = document.getElementById('card');
+  const wrapper = document.getElementById('noWrapper');
+  const cr      = card.getBoundingClientRect();
+  wrapper.style.position = 'absolute';
+  card.style.position    = 'relative';
+  const maxX = cr.width  - 130;
+  const maxY = cr.height - 56;
+  wrapper.style.left      = Math.max(8, Math.random()*maxX) + 'px';
+  wrapper.style.top       = Math.max(8, Math.random()*maxY) + 'px';
+  wrapper.style.transform = 'rotate('+(Math.random()-0.5)*16+'deg)';
+  const s = Math.max(0.55, 1 - hintIdx*0.1);
+  const o = Math.max(0.2,  1 - hintIdx*0.18);
+  btn.style.transform = 'scale('+s+')';
+  btn.style.opacity   = o;
+  if(hintIdx >= hints.length){
+    btn.style.display = 'none';
+    const hint = document.getElementById('noHint');
+    hint.textContent = "T'as pas le choix 😏";
+    hint.classList.remove('pop');
+    void hint.offsetWidth;
+    hint.classList.add('pop');
+  }
+}
+
+/* ---- OUI : fête ! ---- */
 function sayYes(){
-  document.getElementById('step1').classList.add('hidden');
-  const s2=document.getElementById('step2');
-  s2.style.display='block';
-  setTimeout(()=>s2.classList.add('visible'),20);
-  renderDates();renderTimes();
+  // Lancer la fête
+  launchParty();
+  // Après 2.4s on cache l'overlay et on montre le step 2
+  setTimeout(() => {
+    const overlay = document.getElementById('partyOverlay');
+    overlay.style.transition = 'opacity 0.5s';
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      showStep2();
+    }, 500);
+  }, 2400);
 }
 
+function launchParty(){
+  document.getElementById('step1').classList.add('hidden');
+  const overlay = document.getElementById('partyOverlay');
+  overlay.classList.add('show');
+
+  // Emojis qui montent
+  const partyEmojis = ['🎊','🎉','💖','🌟','✨','🥂','💃','🎈','🔥','💕'];
+  const fe = document.getElementById('floatingEmojis');
+  for(let i=0;i<22;i++){
+    setTimeout(()=>{
+      const s = document.createElement('span');
+      s.textContent = partyEmojis[Math.floor(Math.random()*partyEmojis.length)];
+      s.style.left  = (5 + Math.random()*90) + 'vw';
+      s.style.bottom = '-10px';
+      s.style.animationDuration = (1.2 + Math.random()*1.2) + 's';
+      s.style.animationDelay    = Math.random()*0.8 + 's';
+      s.style.fontSize = (1.4 + Math.random()*1.4) + 'rem';
+      fe.appendChild(s);
+      setTimeout(() => s.remove(), 3000);
+    }, i*80);
+  }
+
+  // Confettis
+  spawnConfetti(80);
+}
+
+function showStep2(){
+  const s2 = document.getElementById('step2');
+  s2.style.display = 'block';
+  s2.classList.add('screen');
+  renderDates();
+  renderTimes();
+}
+
+/* ---- Dates ---- */
 function renderDates(){
-  const g=document.getElementById('dateGrid');g.innerHTML='';
-  dates.forEach(d=>{
-    const b=document.createElement('button');
-    b.className='date-btn'+(d.disabled?' dis':'');
-    b.innerHTML='<div class="dn">'+d.label+'</div><div class="num">'+d.num+'</div><div class="mo">'+d.month+'</div>';
-    if(!d.disabled)b.onclick=()=>{
-      document.querySelectorAll('.date-btn').forEach(x=>x.classList.remove('selected'));
-      b.classList.add('selected');selDate=d;selTime=null;renderTimes();checkConfirm();
+  const g = document.getElementById('dateGrid');
+  g.innerHTML = '';
+  dates.forEach(d => {
+    const b = document.createElement('button');
+    b.className = 'date-btn' + (d.disabled ? ' dis' : '');
+    b.innerHTML = '<div class="dn">'+d.label+'</div><div class="num">'+d.num+'</div><div class="mo">'+d.month+'</div>';
+    if(!d.disabled) b.onclick = () => {
+      document.querySelectorAll('.date-btn').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected');
+      selDate = d; selTime = null;
+      renderTimes(); checkConfirm();
     };
     g.appendChild(b);
   });
 }
 
+/* ---- Horaires ---- */
 function renderTimes(){
-  const w=document.getElementById('timeOptions');w.innerHTML='';
-  const isSam = selDate && selDate.label==='Sam';
+  const w = document.getElementById('timeOptions');
+  w.innerHTML = '';
+  const isSam = selDate && selDate.label === 'Sam';
   if(isSam){
-    const lblMidi=document.createElement('div');
-    lblMidi.style.cssText='width:100%;font-size:0.75rem;color:#b5365a;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;margin-top:2px;';
-    lblMidi.textContent='Midi';
-    w.appendChild(lblMidi);
-    const rowMidi=document.createElement('div');
-    rowMidi.style.cssText='display:flex;gap:7px;justify-content:center;flex-wrap:wrap;width:100%;margin-bottom:10px;';
-    timesMidi.forEach(t=>rowMidi.appendChild(makeTimeBtn(t,w)));
-    w.appendChild(rowMidi);
-    const lblSoir=document.createElement('div');
-    lblSoir.style.cssText='width:100%;font-size:0.75rem;color:#b5365a;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;';
-    lblSoir.textContent='Soir';
-    w.appendChild(lblSoir);
-    const rowSoir=document.createElement('div');
-    rowSoir.style.cssText='display:flex;gap:7px;justify-content:center;flex-wrap:wrap;width:100%;';
-    timesSoir.forEach(t=>rowSoir.appendChild(makeTimeBtn(t,w)));
-    w.appendChild(rowSoir);
+    addTimeGroup(w, 'Midi', timesMidi);
+    const sep = document.createElement('div');
+    sep.style.cssText = 'width:100%;height:5px;';
+    w.appendChild(sep);
+    addTimeGroup(w, 'Soir', timesSoir);
   } else {
-    timesSoir.forEach(t=>w.appendChild(makeTimeBtn(t,w)));
+    timesSoir.forEach(t => w.appendChild(makeTimeBtn(t, w)));
   }
 }
 
-function makeTimeBtn(t,container){
-  const b=document.createElement('button');
-  b.className='time-btn';b.textContent=t;
-  b.onclick=()=>{
-    container.querySelectorAll('.time-btn').forEach(x=>x.classList.remove('selected'));
-    b.classList.add('selected');selTime=t;checkConfirm();
+function addTimeGroup(container, label, times){
+  const lbl = document.createElement('div');
+  lbl.className = 'time-section-label';
+  lbl.textContent = label;
+  container.appendChild(lbl);
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:6px;justify-content:center;flex-wrap:wrap;width:100%;';
+  times.forEach(t => row.appendChild(makeTimeBtn(t, container)));
+  container.appendChild(row);
+}
+
+function makeTimeBtn(t, container){
+  const b = document.createElement('button');
+  b.className = 'time-btn';
+  b.textContent = t;
+  b.onclick = () => {
+    container.querySelectorAll('.time-btn').forEach(x => x.classList.remove('selected'));
+    b.classList.add('selected');
+    selTime = t;
+    checkConfirm();
   };
   return b;
 }
 
 function checkConfirm(){
-  document.getElementById('confirmBtn').disabled=!(selDate&&selTime);
+  document.getElementById('confirmBtn').disabled = !(selDate && selTime);
 }
 
+/* ---- Confirmation ---- */
 function confirmDate(){
   submitToForm();
-  launchConfetti();
-  document.getElementById('step2').style.display='none';
-  const s3=document.getElementById('step3');
-  s3.style.display='block';
-  setTimeout(()=>s3.classList.add('visible'),50);
-  const icon='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#b5365a;flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
-  const iconCal='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#b5365a;flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
-  const iconClock='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#b5365a;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
-  const iconHeart='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#b5365a;flex-shrink:0"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>';
-  document.getElementById('recapBlock').innerHTML=
-    '<div class="recap-row">'+icon+' Le Grill de Julia, Cahors</div>'+
-    '<div class="recap-row">'+iconCal+' '+selDate.label+' '+selDate.num+' '+selDate.month+'</div>'+
-    '<div class="recap-row">'+iconClock+' '+selTime+'</div>'+
-    '<div class="recap-row">'+iconHeart+' Une soirée qui s\'annonce super 🥂</div>';
+  document.getElementById('step2').style.display = 'none';
+  const s3 = document.getElementById('step3');
+  s3.style.display = 'block';
+  s3.classList.add('screen');
+
+  const mk = p => `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#b5365a;flex-shrink:0">${p}</svg>`;
+  const iPin   = mk('<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>');
+  const iCal   = mk('<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>');
+  const iClock = mk('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>');
+
+  document.getElementById('recapBlock').innerHTML =
+    `<div class="recap-row">${iPin} Le Grill de Julia, Cahors</div>
+     <div class="recap-row">${iCal} ${selDate.label} ${selDate.num} ${selDate.month}</div>
+     <div class="recap-row">${iClock} ${selTime}</div>`;
+
+  // Loader 10s puis confettis + "Réservé"
+  setTimeout(() => {
+    const badge = document.getElementById('reservBadge');
+    const text  = document.getElementById('badgeText');
+    // Stopper le spin
+    badge.querySelector('.spin').style.display = 'none';
+    text.textContent = 'Réservé';
+    badge.classList.add('done');
+    // Confettis au moment de "Réservé"
+    spawnConfetti(60);
+  }, 10000);
 }
 
 function submitToForm(){
-  const val=selDate.label+' '+selDate.num+' '+selDate.month+' 2026';
-  const body=ENTRY_DATE+'='+encodeURIComponent(val)+'&'+ENTRY_HEURE+'='+encodeURIComponent(selTime);
-  fetch(FORM_ACTION,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body});
+  const val  = selDate.label+' '+selDate.num+' '+selDate.month+' 2026';
+  const body = ENTRY_DATE+'='+encodeURIComponent(val)+'&'+ENTRY_HEURE+'='+encodeURIComponent(selTime);
+  fetch(FORM_ACTION,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
 }
 
-function launchConfetti(){
-  const cols=['#f5ccd9','#b5365a','#fbeaf0','#fbbf24','#a78bfa','#6ee7b7'];
-  for(let i=0;i<60;i++){
+/* ---- Confettis ---- */
+function spawnConfetti(n){
+  const cols = ['#f5ccd9','#b5365a','#fbeaf0','#fbbf24','#a78bfa','#6ee7b7','#ff6eb4','#fff'];
+  for(let i=0;i<n;i++){
     setTimeout(()=>{
-      const el=document.createElement('div');
-      el.className='confetti-piece';
-      el.style.left=Math.random()*window.innerWidth+'px';
-      el.style.top='-10px';
-      el.style.background=cols[Math.floor(Math.random()*cols.length)];
-      el.style.animationDelay=Math.random()*0.4+'s';
-      el.style.transform='rotate('+Math.random()*360+'deg)';
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      const size = 6 + Math.random()*8;
+      el.style.cssText = `
+        left:${Math.random()*100}vw;
+        top:-12px;
+        width:${size}px;
+        height:${size * (0.4+Math.random()*0.8)}px;
+        background:${cols[Math.floor(Math.random()*cols.length)]};
+        animation-duration:${1.4+Math.random()*1.2}s;
+        animation-delay:${Math.random()*0.5}s;
+        border-radius:${Math.random()>0.5?'50%':'3px'};
+      `;
       document.body.appendChild(el);
-      setTimeout(()=>el.remove(),2200);
-    },i*28);
+      setTimeout(()=>el.remove(), 2800);
+    }, i*22);
   }
 }
 
+/* ---- Cœurs flottants bg ---- */
 (function(){
-  const bg=document.getElementById('heartsBg');
-  const syms=['♥','✦','·','♡','✿'];
+  const bg   = document.getElementById('heartsBg');
+  const syms = ['♥','✦','·','♡','✿'];
   for(let i=0;i<18;i++){
-    const h=document.createElement('span');
-    h.className='heart-float';
-    h.textContent=syms[Math.floor(Math.random()*syms.length)];
-    h.style.left=Math.random()*100+'%';
-    h.style.fontSize=(0.8+Math.random()*1.4)+'rem';
-    h.style.animationDuration=(9+Math.random()*13)+'s';
-    h.style.animationDelay=-(Math.random()*22)+'s';
+    const h = document.createElement('span');
+    h.className = 'heart-float';
+    h.textContent = syms[Math.floor(Math.random()*syms.length)];
+    h.style.left   = Math.random()*100+'%';
+    h.style.fontSize = (0.8+Math.random()*1.4)+'rem';
+    h.style.animationDuration = (9+Math.random()*13)+'s';
+    h.style.animationDelay    = -(Math.random()*22)+'s';
     bg.appendChild(h);
   }
 })();
